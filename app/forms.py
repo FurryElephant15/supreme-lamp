@@ -9,5 +9,4 @@ class SignUp(FlaskForm):
 class LogIn(FlaskForm):
     emails = EmailField("Organization Email")
     password = PasswordField('Password', validators=[DataRequired()])
-    remember = BooleanField('Remember Me', validators=[DataRequired()])
     submit = SubmitField('submit')
