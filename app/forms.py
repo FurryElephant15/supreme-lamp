@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, EmailField, FileField, TimeField
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, SelectField, EmailField, FileField, TimeField, RadioField
 from wtforms.validators import DataRequired
 class SignUp(FlaskForm): #form that handles signups
     OrganizationName = StringField('Organization Name', validators=[DataRequired()])
@@ -16,6 +16,7 @@ class postForm(FlaskForm): #handles posts
     imageA = FileField('Upload Image')
     imageB = FileField('Upload Image')
     imageB = FileField('Upload Image')
+    city = RadioField(choices=[("tampa", "Tampa"),("miami", "Miami"),("orlando", "Orlando")])
     time=TimeField()
     submit = SubmitField('Submit')
 
