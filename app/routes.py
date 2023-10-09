@@ -19,7 +19,6 @@ def login():
         login_user(user)
         if current_user.is_authenticated:
             flash("Logged In!")
-            time.sleep(5)
             return redirect('/index')
     return render_template('login.html', form=form)
         
