@@ -1,4 +1,3 @@
-#102080131876
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from app import db, login
@@ -20,3 +19,14 @@ class Request(db.Model):
 @login.user_loader
 def load_user(id):
     return Logins.query.get(int(id))
+class Posts(id):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(120), index=True, unique=True)
+    description = db.Column(db.String(500), index=True, unique=True)
+    city = db.Column(db.String(10), index=True, unique=True)
+    ImageA=db.Column(db.LargeBinary)
+    ImageB=db.Column(db.LargeBinary)
+    ImageC=db.Column(db.LargeBinary)
+
+    
+    

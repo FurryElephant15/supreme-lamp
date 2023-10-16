@@ -35,6 +35,6 @@ def register():
         db.session.commit()
         flash("Congrats! Signed Up!")
     return render_template('signup.html', form=form)
-@app.route('/tampa')
+@app.route('/postindex')
 def tampa():
     return render_template("tampa.html")
