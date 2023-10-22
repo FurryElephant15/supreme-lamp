@@ -1,0 +1,6 @@
+{% extends 'index.html' %}
+{% block content %}
+{% for i in posts %}
+<p><a href="/post/{{i.id}}"> {{i.title}}</a></p>
+{% endfor %}
+{% endblock %}

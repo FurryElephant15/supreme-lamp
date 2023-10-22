@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% block content %}
+<form action="" method="post" novalidate enctype="multipart/form-data">
+{{ form.hidden_tag() }}
+<p>
+    {{ form.title.label }}<br>
+    {{ form.title(size=32) }}
+</p>
+<p>
+    {{ form.description.label }}<br>
+    {{ form.description(size=256) }}
+</p>
+<p>
+    {{ form.imageA.label }}<br>
+    {{ form.imageA }}
+</p>
+<p>
+    {{ form.imageB.label }}<br>
+    {{ form.imageB }}
+</p>
+<p>
+    {{ form.imageC.label }}<br>
+    {{ form.imageC }} 
+</p>
+<p>What City do you want this to be posted in?</p>
+<ul>
+{% for i in form.city %}
+    <li>{{i}} {{ i.label }} 
+    </li>
+{% endfor %}
+</ul>
+
+<p>
+{{form.submit}}
+</p>
+</form>
+{% endblock %}

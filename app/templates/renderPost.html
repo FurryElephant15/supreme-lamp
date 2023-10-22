@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+{% block content %}
+<img src="data:image/jpeg;base64,{{ ImageA }}" alt="Image">
+<img src="data:image/jpeg;base64,{{ ImageB }}" alt="Image">
+<img src="data:image/jpeg;base64,{{ ImageC }}" alt="Image">
+<h2> {{title}}</h2>
+<p>{{description}}</p>
+
+{% endblock %}

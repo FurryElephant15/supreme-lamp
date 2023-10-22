@@ -1,8 +1,8 @@
 from app import app, db
 from flask import render_template, flash, redirect
-from app.forms import SignUp, LogIn
-from app.models import Logins
-from flask_login import current_user, login_user
+from app.forms import SignUp, LogIn, postForm
+from app.models import Logins, Posts
+from flask_login import current_user, login_user, login_required
 import time
 @app.route('/')
 @app.route('/index')
@@ -35,6 +35,48 @@ def register():
         db.session.commit()
         flash("Congrats! Signed Up!")
     return render_template('signup.html', form=form)
-@app.route('/postindex')
+
+@app.route('/createPost', methods=['GET','POST'])
+@login_required
+def createPost():
+    form = postForm()
+    if form.validate_on_submit():
+        imageA_data = None
+        imageB_data = None
+        imageC_data = None
+
+        if form.imageA.data:
+            imageA_data = form.imageA.data.read()
+        if form.imageB.data:
+            imageB_data = form.imageB.data.read()
+        if form.imageC.data:
+            imageC_data = form.imageC.data.read()
+
+        posts = Posts(title = form.title.data, description = form.description.data, city = form.city.data,ImageA = imageA_data, ImageB= imageB_data, ImageC=imageC_data) 
+        db.session.add(posts)
+        db.session.commit()
+    return render_template("post.html", form=form)
+@app.route('/post/<int:id>')
+def renderPost(id):
+    post = Posts.query.get(id)
+    title = post.title
+    description = post.description
+    ImageA=post.ImageA
+    ImageB=post.ImageB
+    ImageC=post.ImageC
+    return render_template("renderPost.html", title = title, description = description,ImageA=ImageA, ImageB=ImageB, ImageC=ImageC)
+@app.route('/tampa')
 def tampa():
-    return render_template("tampa.html")
+    posts = Posts.query.filter(Posts.city == "tampa").all()
+    return render_template("city.html", posts = posts)       
+@app.route('/miami')
+def miami():
+    posts = Posts.query.filter(Posts.city == "miami").all()
+    return render_template("city.html", posts = posts)   
+@app.route('/orlando')
+def orlando():
+    posts = Posts.query.filter(Posts.city == "orlando").all()
+    return render_template("city.html", posts = posts)       
+        
+    
+    
