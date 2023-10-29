@@ -2,7 +2,7 @@ from app import app, db
 from flask import render_template, flash, redirect
 from app.forms import SignUp, LogIn, postForm
 from app.models import Logins, Posts
-from flask_login import current_user, login_user, login_required
+from flask_login import current_user, login_user, login_required, logout_user
 import time
 @app.route('/')
 @app.route('/index')
@@ -52,7 +52,7 @@ def createPost():
         if form.imageC.data:
             imageC_data = form.imageC.data.read()
 
-        posts = Posts(title = form.title.data, description = form.description.data, city = form.city.data,ImageA = imageA_data, ImageB= imageB_data, ImageC=imageC_data) 
+        posts = Posts(title = form.title.data, description = form.description.data, city = form.city.data,ImageA = imageA_data, ImageB= imageB_data, ImageC=imageC_data, author = current_user, email = form.email.data, phone = form.phone.data) 
         db.session.add(posts)
         db.session.commit()
     return render_template("post.html", form=form)
@@ -64,7 +64,10 @@ def renderPost(id):
     ImageA=post.ImageA
     ImageB=post.ImageB
     ImageC=post.ImageC
-    return render_template("renderPost.html", title = title, description = description,ImageA=ImageA, ImageB=ImageB, ImageC=ImageC)
+    author_name = post.author.OrgName 
+    email = post.email
+    phone = post.phone
+    return render_template("renderPost.html", title = title, description = description,ImageA=ImageA, ImageB=ImageB, ImageC=ImageC, author_name = author_name, email = email, phone = phone)
 @app.route('/tampa')
 def tampa():
     posts = Posts.query.filter(Posts.city == "tampa").all()
@@ -76,7 +79,12 @@ def miami():
 @app.route('/orlando')
 def orlando():
     posts = Posts.query.filter(Posts.city == "orlando").all()
-    return render_template("city.html", posts = posts)       
+    return render_template("city.html", posts = posts)      
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect('/index')
+     
         
     
     

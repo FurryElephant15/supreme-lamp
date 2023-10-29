@@ -1,9 +1,12 @@
 {% extends 'index.html' %}
 {% block content %}
-<img src="data:image/jpeg;base64,{{ ImageA }}" alt="Image">
-<img src="data:image/jpeg;base64,{{ ImageB }}" alt="Image">
-<img src="data:image/jpeg;base64,{{ ImageC }}" alt="Image">
+<p>Author: {{ author_name }}</p>
+<img src="data:image/jpeg;base64,{{ ImageA }}" alt="ImageA">
+<img src="data:image/jpeg;base64,{{ ImageB }}" alt="ImageB">
+<img src="data:image/jpeg;base64,{{ ImageC }}" alt="ImageC">
 <h2> {{title}}</h2>
 <p>{{description}}</p>
+<p>Email: {{ email }}</p>
+<p>Phone Number: {{ phone }}</p>
 
 {% endblock %}
