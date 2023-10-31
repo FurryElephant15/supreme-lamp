@@ -35,7 +35,7 @@ def register():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash("Congrats! Signed Up!")
+        return redirect('/')
     return render_template('signup.html', form=form)
 
 @app.route('/createPost', methods=['GET','POST'])
@@ -62,11 +62,10 @@ def createPost():
 
 
         posts = Posts(title = form.title.data, description = form.description.data, city = form.city.data,ImageA = filenameA, ImageB= filenameB, ImageC=filenameC, author = current_user, email = form.email.data, phone = form.phone.data) 
-        flash("Post Created!!")
-        time.sleep(3)
-        return redirect('/index')
         db.session.add(posts)
         db.session.commit()
+        return redirect('/index')
+
         
     return render_template("post.html", form=form)
 @app.route('/post/<int:id>', methods=['GET'])
