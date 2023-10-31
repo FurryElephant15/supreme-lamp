@@ -24,9 +24,9 @@ class Posts(db.Model):
     title = db.Column(db.String(120), index=True)
     description = db.Column(db.String(500), index=True)
     city = db.Column(db.String(10), index=True)
-    ImageA=db.Column(db.LargeBinary)
-    ImageB=db.Column(db.LargeBinary)
-    ImageC=db.Column(db.LargeBinary)
+    ImageA=db.Column(db.String(500))
+    ImageB=db.Column(db.String(500))
+    ImageC=db.Column(db.String(500))
     email = db.Column(db.String(500), index=True, unique=True)
     phone = db.Column(db.String(500), index=True, unique=True)
 

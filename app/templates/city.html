@@ -5,21 +5,21 @@
 {% endblock %}
 {% block content %}
 <p>
+  <p>You are in: {{city}}</p>
     <img src="https://imageio.forbes.com/specials-images/imageserve/61d52d4e3a76ed81ac034ea8/The-10-Tech-Trends-That-Will-Transform-Our-World/960x0.jpg?format=jpg&width=1440" id="homeImg" />
   </p>
 
-  <div id="overlap">We PROVIDE, making it easy for computer access</div>
+  <div id="overlap">We PROVIDE a solution for organizations to donate their old tech, making it easy for computer access</div>
 
   <div id="desc-container">
     <div id="robotimgcontainer">
-      <img src="lion.png" id="robotimg" />
     </div>
 
     <p id="description">
-      In the bay area, not everyone has access to electronics. Through collecting then distributing these resources, it provides a fair learning environment for everyone.
+      In the bay area, not everyone has access to electronics. Through assisting in the collection then distribution of these resources, it provides a fair learning environment for everyone.
     </p>
   </div>
-
+<p>Check out some devices local organizations have posted down here!</p>
 {% for i in posts %}
 <p><a href="/post/{{i.id}}"> {{i.title}}</a></p>
 {% endfor %}

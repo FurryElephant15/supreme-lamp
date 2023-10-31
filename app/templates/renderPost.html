@@ -1,9 +1,14 @@
 {% extends 'index.html' %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="{{url_for('static', filename='tampa.css')}}" />
+
+{% endblock %}
+
 {% block content %}
 <p>Author: {{ author_name }}</p>
-<img src="data:image/jpeg;base64,{{ ImageA }}" alt="ImageA">
-<img src="data:image/jpeg;base64,{{ ImageB }}" alt="ImageB">
-<img src="data:image/jpeg;base64,{{ ImageC }}" alt="ImageC">
+<img src="{{ url_for('static', filename=ImageA) }}" alt="ImageA" id = "render">
+<img src="{{ url_for('static', filename=ImageB) }}" alt="ImageB" id = "render">
+<img src="{{ url_for('static', filename=ImageC) }}" alt="ImageC" id = "render">
 <h2> {{title}}</h2>
 <p>{{description}}</p>
 <p>Email: {{ email }}</p>

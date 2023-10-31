@@ -4,18 +4,34 @@
     <meta charset="utf-8" />
     <title>Tampa</title>
     <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='general.css')}}" />
+    <style>
+      .topnav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+    </style>
     {% block head %} {% endblock %}
   </head>
   <body>
     <div class="topnav">
-      <a href="/tampa">Tampa</a>
-      <a href="/orlando">Orlando</a>
-      <a href="/miami">Miami</a>
-      <a href="/login">Log in</a>
-      <a href="/signup">Sign Up</a>
-      <a href="/createPost">Create a Request</a>
-      <a href="/logout">Log Out</a>
-
+      <div class="leftnav">
+        <a href="/tampa">Tampa</a>
+        <a href="/orlando">Orlando</a>
+        <a href="/miami">Miami</a>
+        {% if current_user.is_authenticated %}
+          <a href="/createPost">Create a Request</a>
+          <a href="/logout">Log Out</a>
+        {% else %}
+          <a href="/login">Log in</a>
+          <a href="/signup">Sign Up</a>
+        {% endif %}
+      </div>
+      <div class="user-info">
+        {% if current_user.is_authenticated %}
+          <p>Welcome, {{ current_user.OrgName }}!</p>
+        {% endif %}
+      </div>
     </div>
     {% block content %}{% endblock %}
   </body>
