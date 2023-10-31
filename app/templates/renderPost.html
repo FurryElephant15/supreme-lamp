@@ -6,12 +6,18 @@
 
 {% block content %}
 <p>Author: {{ author_name }}</p>
+{% if ImageA%}
 <img src="{{ url_for('static', filename=ImageA) }}" alt="ImageA" id = "render">
+{% endif %}
+{% if ImageB %}
 <img src="{{ url_for('static', filename=ImageB) }}" alt="ImageB" id = "render">
+{% endif %}
+{% if ImageC %}
 <img src="{{ url_for('static', filename=ImageC) }}" alt="ImageC" id = "render">
+{% endif %}
 <h2> {{title}}</h2>
 <p>{{description}}</p>
 <p>Email: {{ email }}</p>
 <p>Phone Number: {{ phone }}</p>
-
+<p>If the author wants to delete, add /delete to the end of the URL. Otherwise it won't work </p>
 {% endblock %}

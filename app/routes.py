@@ -15,15 +15,23 @@ def login():
     if form.validate_on_submit():
         user = Logins.query.filter_by(email=form.emails.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Invalid! Check your login details')
             return redirect("/login")
         login_user(user)
         if current_user.is_authenticated:
-            flash("Logged In!")
-            time.sleep(3)
             return redirect('/index')
     return render_template('login.html', form=form)
-        
+
+@app.route('/post/<int:post_id>/delete')
+@login_required
+def delete_post(post_id):
+    post = Posts.query.get_or_404(post_id)
+
+    if post.user_id == current_user.id:
+        db.session.delete(post)
+        db.session.commit()
+    
+
+    return redirect('/')     
         
        
        
@@ -73,13 +81,19 @@ def renderPost(id):
     post = Posts.query.get(id)
     title = post.title
     description = post.description
-    ImageA=post.ImageA
-    ImageB=post.ImageB
-    ImageC=post.ImageC
+    ImageA = None
+    ImageB = None 
+    ImageC = None
+    if post.ImageA:
+        ImageA=post.ImageA
+    if post.ImageB:
+        ImageB=post.ImageB
+    if post.ImageC:
+        ImageC=post.ImageC
     author_name = post.author.OrgName 
     email = post.email
     phone = post.phone
-    return render_template("renderPost.html", title = title, description = description,ImageA=ImageA, ImageB=ImageB, ImageC=ImageC, author_name = author_name, email = email, phone = phone)
+    return render_template("renderPost.html", title = title, description = description,ImageA=ImageA if ImageA else None, ImageB=ImageB if ImageB else None, ImageC=ImageC if ImageC else None, author_name = author_name, email = email, phone = phone)
 @app.route('/tampa')
 @app.route('/')
 @app.route('/index')
