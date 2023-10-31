@@ -27,8 +27,8 @@ class Posts(db.Model):
     ImageA=db.Column(db.String(500))
     ImageB=db.Column(db.String(500))
     ImageC=db.Column(db.String(500))
-    email = db.Column(db.String(500), index=True, unique=True)
-    phone = db.Column(db.String(500), index=True, unique=True)
+    email = db.Column(db.String(500), index=True)
+    phone = db.Column(db.String(500), index=True)
 
     user_id = db.Column(db.Integer, db.ForeignKey('logins.id'))
     def __repr__(self):
